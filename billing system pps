@@ -1,0 +1,47 @@
+#include <stdio.h>
+
+int main() {
+    char productName[5][30];   
+    int quantity[5];           
+    float price[5];            
+    float total[5];           
+    float grandTotal = 0;      
+    float discountPercent, discountAmount, netAmount;
+    
+    printf("Enter details of 5 products:\n");
+
+    for (int i = 0; i < 5; i++) {
+        printf("\nProduct %d name: ", i + 1);
+        scanf("%s", productName[i]);
+
+        printf("Quantity: ");
+        scanf("%d", &quantity[i]);
+
+        printf("Price per unit: ");
+        scanf("%f", &price[i]);
+
+        total[i] = quantity[i] * price[i];
+        grandTotal += total[i];
+    }
+
+    printf("\nEnter discount percentage: ");
+    scanf("%f", &discountPercent);
+
+    discountAmount = (grandTotal * discountPercent) / 100.0;
+    netAmount = grandTotal - discountAmount;
+
+    printf("\n================= BILL =================\n");
+    printf("%-15s %-10s %-10s %-10s\n", "Product", "Quantity", "Price", "Total");
+
+    for (int i = 0; i < 5; i++) {
+        printf("%-15s %-10d %-10.2f %-10.2f\n", productName[i], quantity[i], price[i], total[i]);
+    }
+
+    printf("========================================\n");
+    printf("%-15s %-10s %-10s %-10.2f\n", "Grand Total", "", "", grandTotal);
+    printf("%-15s %-10s %-10s %-10.2f\n", "Discount", "", "", discountAmount);
+    printf("%-15s %-10s %-10s %-10.2f\n", "Net Amount", "", "", netAmount);
+    printf("========================================\n");
+
+    return 0;
+}
