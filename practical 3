@@ -1,0 +1,29 @@
+#include <stdio.h>
+
+long long recursiveFact(int n) {
+    if (n == 0 || n == 1) return 1;
+    return n * recursiveFact(n - 1);
+}
+
+long long iterativeFact(int n) {
+    long long res = 1;
+    for (int i = 2; i <= n; i++) res *= i;
+    return res;
+}
+int main() {
+    int choice, n;
+    printf("1.Iterative 2.Recursive\nChoice: ");
+    scanf("%d", &choice);
+    printf("Enter a number (0-20): ");
+    scanf("%d", &n);
+
+    // Edge case handling
+    if (n < 0 || n > 20) {
+        printf("Error: Input must be between 0 and 20.\n");
+        return 1;
+    }
+    if (choice == 1) printf("Iterative: %lld\n", iterativeFact(n));
+    else if (choice == 2) printf("Recursive: %lld\n", recursiveFact(n));
+    else printf("Invalid choice.\n");
+    return 0;
+}
