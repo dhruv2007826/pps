@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int main() {
+    int choice, i;
+    char str[100];
+
+    do {
+        printf("\n1.Reverse 2.Upper 3.Lower 4.Length 5.Exit\nChoice: ");
+        scanf("%d", &choice);
+        if (choice == 5) break;
+
+        printf("Enter string: ");
+        getchar(); // Clear buffer
+        fgets(str, 100, stdin);
+        str[strcspn(str, "\n")] = 0; // Remove newline
+
+        switch(choice) {
+            case 1: printf("Reversed: ");
+                    for(i = strlen(str)-1; i >= 0; i--) putchar(str[i]); break;
+            case 2: for(i = 0; str[i]; i++) putchar(toupper(str[i])); break;
+            case 3: for(i = 0; str[i]; i++) putchar(tolower(str[i])); break;
+            case 4: printf("Length: %lu", strlen(str)); break;
+            default: printf("Invalid!");
+        }
+        printf("\n");
+    } while(choice != 5);
+    return 0;
+}
