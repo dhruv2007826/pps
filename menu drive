@@ -1,0 +1,22 @@
+#include <stdio.h>
+
+int main() {
+    int choice, n, a, b, c, sum;
+
+    do {
+        printf("\n1.Even/Odd 2.Pos/Neg 3.Greatest 4.Sum Digits 5.Exit\nChoice: ");
+        scanf("%d", &choice);
+        switch(choice) {
+            case 1: printf("Num: "); scanf("%d", &n);
+                    printf(n % 2 == 0 ? "Even\n" : "Odd\n"); break;
+            case 2: printf("Num: "); scanf("%d", &n);
+                    if(n>0) printf("Pos\n"); else if(n<0) printf("Neg\n"); else printf("Zero\n"); break;
+            case 3: printf("3 Nums: "); scanf("%d %d %d", &a, &b, &c);
+                    printf("Greatest: %d\n", (a>b && a>c) ? a : (b>c ? b : c)); break;
+            case 4: printf("Num: "); scanf("%d", &n);
+                    sum = 0; while(n != 0) { sum += n % 10; n /= 10; }
+                    printf("Sum: %d\n", sum); break;
+        }
+    } while(choice != 5);
+    return 0;
+}
