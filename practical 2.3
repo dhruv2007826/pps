@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <stdlib.h>
+int main(){
+    int c,n,a,b,d,s;
+    while(printf("\n1.O/E 2.P/N 3.Max 4.Sum 5.Exit: "),scanf("%d",&c)==1&&c!=5){
+        switch(c){
+            case 1: scanf("%d",&n); printf(n%2?"Odd\n":"Even\n"); break;
+            case 2: scanf("%d",&n); printf(n>0?"Pos\n":n<0?"Neg\n":"Zero\n"); break;
+            case 3: 
+                if(scanf("%d%d%d",&a,&b,&d)==3)
+                    printf("Max: %d\n",a>b&&a>d?a:(b>d?b:d));
+                else{ printf("Invalid\n"); while(getchar()!='\n'); }
+                break;
+            case 4:
+                for(scanf("%d",&n),s=0,n=abs(n);n;s+=n%10,n/=10);
+                printf("Sum: %d\n",s); 
+                break;
+            default: printf("Invalid\n");
+        }
+    }
+    return 0;
+}
