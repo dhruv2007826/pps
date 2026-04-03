@@ -1,0 +1,49 @@
+#include <stdio.h>
+int length(char s[]) 
+{
+    int i = 0;
+    while(s[i]) i++;
+    return i;
+}
+int main()
+{
+    char s[100];
+    int ch, i, l;
+
+    while(1) {
+        printf("\n1.Reverse 2.Upper 3.Lower 4.Length 5.Exit\nChoice: ");
+        scanf("%d", &ch);
+
+        if(ch == 5) break;
+
+        printf("Enter string: ");
+        scanf(" %[^\n]", s);
+
+        l = length(s);
+        if(ch == 1) {
+            for(i = 0; i < l/2; i++) {
+                char temp = s[i];
+                s[i] = s[l-i-1];
+                s[l-i-1] = temp;
+            }
+            printf("Result: %s", s);
+        }
+        else if(ch == 2) {
+            for(i = 0; s[i]; i++)
+                if(s[i] >= 'a' && s[i] <= 'z') s[i] -= 32;
+            printf("Result: %s", s);
+        }
+        else if(ch == 3) {
+            for(i = 0; s[i]; i++)
+                if(s[i] >= 'A' && s[i] <= 'Z') s[i] += 32;
+            printf("Result: %s", s);
+        }
+        else if(ch == 4) {
+            printf("Length: %d", l);
+        }
+        else {
+            printf("Wrong choice");
+        }
+    }
+    return 0;
+}
