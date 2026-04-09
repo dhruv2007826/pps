@@ -1,0 +1,40 @@
+#include <stdio.h>
+
+struct S { int r; char n[20]; float m; } s[100];
+int c = 0, ch, i, r, j;
+
+int main() {
+    while (1) {
+        printf("\n1.Add 2.Disp 3.Search 4.Del 5.Exit: ");
+        scanf("%d", &ch);
+        if (ch == 5) break;
+
+        switch (ch) {
+            case 1:
+                printf("Enter Roll: ");  scanf("%d", &s[c].r);
+                printf("Enter Name: ");  scanf("%s", s[c].n);
+                printf("Enter Marks: "); scanf("%f", &s[c].m);
+                c++;
+                break;
+            case 2:
+                for (i = 0; i < c; i++) 
+                    printf("\nRoll: %d | Name: %s | Marks: %.1f", s[i].r, s[i].n, s[i].m);
+                break;
+            case 3:
+                printf("Enter Roll to search: "); scanf("%d", &r);
+                for (i = 0; i < c; i++)
+                    if (s[i].r == r) printf("Found: %s, %.1f", s[i].n, s[i].m);
+                break;
+            case 4:
+                printf("Enter Roll to delete: "); scanf("%d", &r);
+                for (i = 0; i < c; i++)
+                    if (s[i].r == r) {
+                        for (j = i; j < c - 1; j++) s[j] = s[j + 1];
+                        c--; i--;
+                        printf("Deleted.");
+                    }
+                break;
+        }
+    }
+    return 0;
+}
