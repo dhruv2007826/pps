@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    FILE *data, *odd, *even;
+    int num;
+    data = fopen("data.txt", "r");
+    odd = fopen("odd.txt", "w");
+    even = fopen("even.txt", "w");
+    if (data == NULL || odd == NULL || even == NULL) {
+        printf("File opening error.\n");
+        return 1;
+    }
+
+    while (fscanf(data, "%d", &num) != EOF) {
+        if (num % 2 == 0)
+            fprintf(even, "%d ", num);
+        else
+            fprintf(odd, "%d ", num);
+    }
+    fclose(data);
+    fclose(odd);
+    fclose(even);
+    odd = fopen("odd.txt", "r");
+    printf("Odd Numbers:\n");
+    while (fscanf(odd, "%d", &num) != EOF)
+        printf("%d ", num);
+    fclose(odd);  
+    even = fopen("even.txt", "r");
+    printf("\nEven Numbers:\n");
+    while (fscanf(even, "%d", &num) != EOF)
+        printf("%d ", num);
+    fclose(even);
+    return 0;
+}
