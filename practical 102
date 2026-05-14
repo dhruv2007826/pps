@@ -1,0 +1,176 @@
+Buggy Program (With Errors)
+
+#include <stdio.h>
+
+int main() {
+    int n, i, sum;
+    int arr[100];
+
+    printf("Enter number of elements: ");
+    scanf("%d", n);   // Error: Missing &
+
+    printf("Enter elements:\n");
+    for (i = 0; i <= n; i++) {   // Error: Off-by-one
+        scanf("%d", &arr[i]);
+    }
+
+    for (i = 0; i < n; i++) {
+        sum = sum + arr[i];   // Error: sum not initialized
+    }
+
+    printf("Sum = %d\n", sum);
+
+    return 0;
+}
+
+
+2. Errors Identified
+
+Syntax Error
+scanf("%d", n);
+Missing &n
+
+Correct: 
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int n, i;
+    int *arr;
+    int sum = 0;
+
+    printf("Enter number of elements: ");
+
+    // Input validation
+    if (scanf("%d", &n) != 1 || n <= 0) {
+        printf("Invalid input! Size must be positive.\n");
+        return 1;
+    }
+
+    // Dynamic memory allocation
+    arr = (int *)malloc(n * sizeof(int));
+
+    // Check memory allocation
+    if (arr == NULL) {
+        printf("Memory allocation failed!\n");
+        return 1;
+    }
+
+    printf("Enter %d elements:\n", n);
+
+    // Input array elements
+    for (i = 0; i < n; i++) {
+        if (scanf("%d", &arr[i]) != 1) {
+            printf("Invalid input!\n");
+            free(arr);
+            return 1;
+        }
+    }
+
+    // Calculate sum
+    for (i = 0; i < n; i++) {
+        sum += arr[i];
+    }
+
+    printf("Sum = %d\n", sum);
+
+    // Free allocated memory
+    free(arr);
+
+    return 0;
+}
+
+
+3. Fixed and Optimized Program
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int n, i;
+    int *arr;
+    int sum = 0;
+
+    printf("Enter number of elements: ");
+
+    if (scanf("%d", &n) != 1 || n <= 0) {
+        printf("Invalid input! Size must be positive.\n");
+        return 1;
+    }
+
+    arr = (int*)malloc(n * sizeof(int));
+
+    if (arr == NULL) {
+        printf("Memory allocation failed!\n");
+        return 1;
+    }
+
+    printf("Enter %d elements:\n", n);
+
+    for (i = 0; i < n; i++) {
+        if (scanf("%d", &arr[i]) != 1) {
+            printf("Invalid input!\n");
+            free(arr);
+            return 1;
+        }
+    }
+
+    for (i = 0; i < n; i++) {
+        sum += arr[i];
+    }
+
+    printf("Sum = %d\n", sum);
+
+    free(arr);
+
+    return 0;
+}
+
+
+4.    Optimizations Applied
+ Memory Optimization
+Used malloc() instead of fixed array
+
+Input Validation
+Checked invalid input
+Checked negative or zero size
+
+Safe Programming
+Checked malloc() failure
+Used free() to release memory
+
+ Correct Logic
+Proper loop condition i < n
+Initialized sum = 0
+
+5. Debugging Using GDB
+Compile Program
+
+gcc -g program.c -o program
+Start GDB
+gdb ./program
+Useful GDB Commands
+Command	Purpose
+
+break main	Set breakpoint
+run	Start program
+next	Execute next line
+print n	Display value of n
+
+print sum	Display value of sum
+continue	Resume execution
+
+6. Example Run
+
+Input
+
+Enter number of elements: 5
+
+Enter 5 elements:
+
+1 2 3 4 5
+
+Output
+
+Sum = 15
